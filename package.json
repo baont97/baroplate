@@ -7,19 +7,26 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "ad": "yarn rnuc .env.dev && npx react-native run-android",
+    "as": "yarn rnuc .env.st && npx react-native run-android",
+    "ap": "yarn rnuc .env.prd && npx react-native run-android",
+    "id": "yarn rnuc .env.dev && npx react-native run-ios --simulator \"iPhone 15 Pro Max\"",
+    "is": "yarn rnuc .env.st && npx react-native run-ios --simulator \"iPhone 15 Pro Max\"",
+    "ip": "yarn rnuc .env.prd && npx react-native run-ios --simulator \"iPhone 15 Pro Max\""
   },
   "dependencies": {
-    "@react-navigation/native": "^6.1.17",
-    "@react-navigation/native-stack": "^6.9.26",
-    "@reduxjs/toolkit": "^2.2.2",
+    "@react-navigation/native": "6.1.17",
+    "@react-navigation/native-stack": "6.9.26",
+    "@reduxjs/toolkit": "2.2.2",
     "react": "18.2.0",
     "react-native": "0.73.6",
     "react-native-mmkv": "^2.12.2",
-    "react-native-safe-area-context": "^4.9.0",
-    "react-native-screens": "^3.29.0",
-    "react-redux": "^9.1.0",
-    "redux-persist": "^6.0.0"
+    "react-native-safe-area-context": "4.9.0",
+    "react-native-screens": "3.29.0",
+    "react-native-ultimate-config": "6.0.1",
+    "react-redux": "9.1.0",
+    "redux-persist": "6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

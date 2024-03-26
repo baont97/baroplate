@@ -3,6 +3,11 @@ node_modules
 
 /vendor/*
 
+# Android
+.gradle
+.idea
+local.properties
+
 # Xcode
 #
 build/
@@ -26,3 +31,6 @@ DerivedData
 Podfile.lock
 Pods
 *.xcworkspace
+
+# react-native-ultimate-config
+rnuc.xcconfig
