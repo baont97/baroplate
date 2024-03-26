@@ -1,18 +1,24 @@
-import React from 'react';
+import React from "react";
 
-import { Button, StyleProp, Text, View, ViewStyle } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AppStackParamList } from 'navigators';
-import { signIn } from 'store';
-import { useAppDispatch } from 'hooks';
+import { Button, StyleProp, Text, View, ViewStyle } from "react-native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { AppStackParamList } from "navigators";
+import { signIn } from "store";
+import { useAppDispatch } from "hooks";
+import { useLoader } from "@baont97/rn-loader";
 
 export const SignInScreen: React.FC<
-  NativeStackScreenProps<AppStackParamList, 'SignIn'>
-> = props => {
+  NativeStackScreenProps<AppStackParamList, "SignIn">
+> = (props) => {
+  const loader = useLoader();
   const dispatch = useAppDispatch();
 
   const _signIn = () => {
-    dispatch(signIn('sample'));
+    loader.show();
+    setTimeout(() => {
+      dispatch(signIn("sample"));
+      loader.hide();
+    }, 1000);
   };
 
   return (
@@ -25,6 +31,6 @@ export const SignInScreen: React.FC<
 
 const $root: StyleProp<ViewStyle> = {
   flex: 1,
-  alignItems: 'center',
-  justifyContent: 'center',
+  alignItems: "center",
+  justifyContent: "center",
 };

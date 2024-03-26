@@ -16,6 +16,7 @@
     "ip": "yarn rnuc .env.prd && npx react-native run-ios --simulator \"iPhone 15 Pro Max\""
   },
   "dependencies": {
+    "@baont97/rn-loader": "^0.0.2",
     "@react-navigation/native": "6.1.17",
     "@react-navigation/native-stack": "6.9.26",
     "@reduxjs/toolkit": "2.2.2",
