@@ -9,7 +9,9 @@
       "@navigators/*": ["src/navigators/*"],
       "@store/*": ["src/store/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@services/*": ["src/services/*"],
+      "@models/*": ["src/models/*"]
     }
   }
 }

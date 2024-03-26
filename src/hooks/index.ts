@@ -1,1 +1,1 @@
-export * from './RTK';
+export * from './rtk';

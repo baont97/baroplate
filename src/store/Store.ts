@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
   persistStore,
   persistReducer,
@@ -8,30 +8,34 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist';
-import { reduxStorage } from 'utils';
+} from "redux-persist";
+import { reduxStorage } from "utils";
+import { createLogger } from "redux-logger";
+import AuthSlice, { authSliceKey } from "./slices/auth-slice";
 
-import AuthSlice, { authSliceKey } from './slices/AuthSlice';
-
+const logger = createLogger({});
 const rootReducer = combineReducers({ auth: AuthSlice });
 
 const persistedReducer = persistReducer(
   {
-    key: 'root',
+    key: "root",
     storage: reduxStorage,
     blacklist: [authSliceKey],
   },
-  rootReducer,
+  rootReducer
 );
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
+  middleware: (getDefaultMiddleware) => {
+    const extraMiddlewares = [];
+    if (__DEV__) extraMiddlewares.push(logger);
+    return getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(extraMiddlewares);
+  },
 });
 
 export const persistor = persistStore(store);

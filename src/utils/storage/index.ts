@@ -1,2 +1,2 @@
-export * from './Storage';
-export * from './ReduxStorage';
+export * from './storage';
+export * from './redux-storage';
