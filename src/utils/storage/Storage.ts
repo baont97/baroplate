@@ -6,7 +6,3 @@ export const storage = new MMKV({
 });
 
 export const secureStorage = RNSecureStorage;
-
-export enum storageKeys {
-  token = "TOKEN",
-}

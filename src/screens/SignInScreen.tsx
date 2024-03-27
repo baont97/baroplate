@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useCallback, useLayoutEffect } from "react";
 
-import { Button, StyleProp, Text, View, ViewStyle } from "react-native";
+import {
+  Button,
+  StyleProp,
+  TextInput,
+  TextStyle,
+  View,
+  ViewStyle,
+} from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppStackParamList } from "navigators";
 import { signIn } from "store";
@@ -10,10 +17,14 @@ import { useLoader } from "@baont97/rn-loader";
 export const SignInScreen: React.FC<
   NativeStackScreenProps<AppStackParamList, "SignIn">
 > = (props) => {
+  const { navigation } = props;
   const loader = useLoader();
+
+  /// redux
   const dispatch = useAppDispatch();
 
-  const _signIn = () => {
+  /// functions
+  const submit = () => {
     loader.show();
     setTimeout(() => {
       dispatch(signIn("sample"));
@@ -21,16 +32,37 @@ export const SignInScreen: React.FC<
     }, 1000);
   };
 
+  const changeLng = () => {
+    navigation.navigate("Language");
+  };
+
+  /// navigations
+  useLayoutEffect(
+    useCallback(() => {
+      navigation.setOptions({
+        headerRight: () => <Button title="Language" onPress={changeLng} />,
+      });
+    }, [])
+  );
+
   return (
     <View style={$root}>
-      <Text>{props.route.name}</Text>
-      <Button title="sign in" onPress={_signIn} />
+      <TextInput placeholder="user name" style={$input} />
+      <TextInput placeholder="password" style={$input} />
+      <Button title="sign in" onPress={submit} />
     </View>
   );
 };
 
 const $root: StyleProp<ViewStyle> = {
   flex: 1,
-  alignItems: "center",
-  justifyContent: "center",
+  padding: 12,
+};
+
+const $input: StyleProp<TextStyle> = {
+  height: 36,
+  backgroundColor: "white",
+  marginBottom: 12,
+  paddingHorizontal: 12,
+  borderRadius: 2,
 };

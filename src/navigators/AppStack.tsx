@@ -1,12 +1,13 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { DemoScreen, SignInScreen } from 'screens';
-import { selectIsSignedIn } from 'store/slices/auth-slice';
-import { useAppSelector } from 'hooks';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { DemoScreen, SignInScreen, LanguageScreen } from "screens";
+import { selectIsSignedIn } from "store/slices/auth-slice";
+import { useAppSelector } from "hooks";
 
 export type AppStackParamList = {
   Demo: undefined;
   SignIn: undefined;
+  Language: undefined;
 };
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
@@ -20,6 +21,7 @@ export const AppStack = () => {
       ) : (
         <Stack.Screen name="SignIn" component={SignInScreen} />
       )}
+      <Stack.Screen name="Language" component={LanguageScreen} />
     </Stack.Navigator>
   );
 };

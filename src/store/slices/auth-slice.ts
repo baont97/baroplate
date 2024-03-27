@@ -1,7 +1,7 @@
 import { RootState } from "store";
 import { createSlice } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
-import { reduxSecureStorage, storage, storageKeys } from "utils";
+import { reduxSecureStorage, storage, StorageKeys } from "utils";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { api } from "services";
 
