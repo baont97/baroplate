@@ -17,6 +17,7 @@ module.exports = {
           "@models": "./src/models",
           "@i18n": "./src/i18n",
           "@assets": "./assets",
+          "@theme": "./src/theme",
         },
       },
     ],
