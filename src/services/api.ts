@@ -8,7 +8,7 @@ import * as AxiosLogger from "axios-logger";
 
 const refreshTokenEndpoint = "";
 
-const config: CreateAxiosDefaults<any> = {
+const config: CreateAxiosDefaults = {
   baseURL: UltimateConfig.BASE_URL,
   timeout: 3000,
   headers: {},
@@ -63,7 +63,7 @@ class Api {
     });
 
     if (response.status === 200) {
-      const { accessToken, refreshToken } = response.data;
+      const { accessToken } = response.data;
 
       // Save new tokens
       store.dispatch(signIn(accessToken));

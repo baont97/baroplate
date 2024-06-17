@@ -51,4 +51,5 @@ const getTypography = (fontName: string) => ({
   }),
 });
 
-export const typography = getTypography("Montserrat");
+export const typography = getTypography("Outfit");
+export type KTypography = keyof typeof typography;

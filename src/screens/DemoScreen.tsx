@@ -9,8 +9,8 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppStackParamList } from "navigators";
 import { signOut } from "store";
 import { useAppDispatch } from "hooks";
-import { pokemonApi } from "services/api-pokemon";
 import { Pokemon } from "models";
+import { pokemonApi } from "services";
 
 export const DemoScreen: React.FC<
   NativeStackScreenProps<AppStackParamList, "Demo">
@@ -37,7 +37,7 @@ export const DemoScreen: React.FC<
   useLayoutEffect(
     useCallback(() => {
       navigation.setOptions({
-        headerRight: (props) => <Button title="sign out" onPress={_signOut} />,
+        headerRight: () => <Button title="sign out" onPress={_signOut} />,
       });
     }, [])
   );

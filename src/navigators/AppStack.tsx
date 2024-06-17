@@ -1,8 +1,8 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { DemoScreen, SignInScreen, LanguageScreen } from "screens";
-import { selectIsSignedIn } from "store/slices/auth-slice";
 import { useAppSelector } from "hooks";
+import { selectIsSignedIn } from "store";
 
 export type AppStackParamList = {
   Demo: undefined;

@@ -1,9 +1,9 @@
 import { RootState } from "store";
 import { createSlice } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
-import { reduxSecureStorage, storage, StorageKeys } from "utils";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { reduxSecureStorage } from "utils";
 import { api } from "services";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 export const authSliceKey = "auth";
 

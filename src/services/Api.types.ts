@@ -1,10 +1,8 @@
-import { AxiosResponse } from "axios";
-
 /**
  * T for data type
  * E for extra data type when error
  */
-export type ApiResponse<T, E = {}> =
+export type ApiResponse<T, E = object> =
   | { ok: true; data: T }
   | { ok: false; messageCode: string; extraData?: E };
 
