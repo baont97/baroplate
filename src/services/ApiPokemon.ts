@@ -1,6 +1,6 @@
 import { Pokemon } from "models";
-import { ApiResponse } from "./api.types";
-import { api } from "./api";
+import { ApiResponse } from "./Api.types";
+import { api } from "./Api";
 
 const getList = async (): Promise<ApiResponse<Pokemon[]>> => {
   const response = await api.get("/pokemon");

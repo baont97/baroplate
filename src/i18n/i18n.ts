@@ -1,8 +1,8 @@
 import i18n, { LanguageDetectorAsyncModule } from "i18next";
 import { initReactI18next } from "react-i18next";
 import { storage, StorageKeys } from "utils";
-import { en } from "./en";
-import { vi } from "./vi";
+import { en } from "./EN";
+import { vi } from "./VI";
 import { SupportedLngs } from "./i18n.types";
 
 const languageDetector: LanguageDetectorAsyncModule = {

@@ -11,7 +11,7 @@ import {
 } from "redux-persist";
 import { reduxStorage } from "utils";
 import { createLogger } from "redux-logger";
-import AuthSlice, { authSliceKey } from "./slices/auth-slice";
+import AuthSlice, { authSliceKey } from "./slices/AuthSlice";
 
 const logger = createLogger({});
 const rootReducer = combineReducers({ auth: AuthSlice });
