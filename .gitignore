@@ -26,11 +26,20 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+**/.xcode.env.local
 
 # CocoaPods
 Podfile.lock
-Pods
+**/Pods/
 *.xcworkspace
 
 # react-native-ultimate-config
 rnuc.xcconfig
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

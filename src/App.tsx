@@ -7,7 +7,9 @@ import { Provider } from "react-redux";
 import { persistor, store } from "store";
 import { PersistGate } from "redux-persist/integration/react";
 import { LoaderProvider } from "@baont97/rn-loader";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { api } from "services";
+import { style } from "theme";
 
 import BootSplash from "react-native-bootsplash";
 
@@ -17,14 +19,16 @@ export const App = () => {
   };
 
   return (
-    <LoaderProvider>
-      <Provider store={store}>
-        <PersistGate persistor={persistor} onBeforeLift={boostrapAsync}>
-          <NavigationContainer onReady={() => BootSplash.hide()}>
-            <AppStack />
-          </NavigationContainer>
-        </PersistGate>
-      </Provider>
-    </LoaderProvider>
+    <GestureHandlerRootView style={style.flex_1}>
+      <LoaderProvider>
+        <Provider store={store}>
+          <PersistGate persistor={persistor} onBeforeLift={boostrapAsync}>
+            <NavigationContainer onReady={() => BootSplash.hide()}>
+              <AppStack />
+            </NavigationContainer>
+          </PersistGate>
+        </Provider>
+      </LoaderProvider>
+    </GestureHandlerRootView>
   );
 };

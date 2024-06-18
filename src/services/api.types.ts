@@ -9,3 +9,16 @@ export type ApiResponse<T, E = object> =
 export type TApiSetupParams = {
   token: string;
 };
+
+export type TLinkHeader = {
+  page: string;
+  rel: string;
+  size: string;
+  url: string;
+};
+
+export type TPaging = {
+  first: TLinkHeader;
+  last: TLinkHeader;
+  next: TLinkHeader;
+};
