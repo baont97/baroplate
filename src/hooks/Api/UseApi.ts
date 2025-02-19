@@ -1,20 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LayoutAnimation, Platform } from "react-native";
 import { delay } from "utils";
+import { usePreventMultipleCalls } from "hooks/Common";
+
 import isEqual from "lodash.isequal";
+import _ from "lodash";
 
 export type UseApiInMountOptions<T, P> = {
-  useAnimation?: boolean;
-  delay?: number;
   initData: T;
   initParams: P;
+  delay?: number;
+  useAnimation?: boolean;
+  willTakeNilData?: boolean;
   willEffecWhenParamsChange?: boolean;
 };
 
 export type UseApiInMountResult<T, P> = {
   loading: boolean;
   refreshing: boolean;
-  mounted: boolean;
+  mounted: () => boolean;
   data: T;
   params: P;
   refresh: () => Promise<any>;
@@ -30,9 +34,12 @@ export function useApiInMount<T, P>(
 ): UseApiInMountResult<T, P> {
   const _loading = useState<boolean>(false);
   const _refreshing = useState<boolean>(false);
-  const _mounted = useState<boolean>(false);
   const _data = useState<T>(options.initData);
   const _params = useState<P>(options.initParams);
+
+  const mountedRef = useRef<boolean>(false);
+
+  const _mountFunction = usePreventMultipleCalls(mountFunction);
 
   const refresh = async () => {
     if (_refreshing[0]) return;
@@ -54,10 +61,16 @@ export function useApiInMount<T, P>(
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     }
 
-    const data = await mountFunction(params);
+    const data = await _mountFunction(params);
 
-    _data[1](data === undefined || data === null ? options?.initData : data);
-    _mounted[1](true);
+    _data[1]((prev) => {
+      if (_.isEqual(prev, data)) return prev;
+      else {
+        if (_.isNil(data)) return options.willTakeNilData ? data : prev;
+        else return data;
+      }
+    });
+    mountedRef.current = true;
   };
 
   useEffect(() => {
@@ -81,7 +94,7 @@ export function useApiInMount<T, P>(
     updateData: _data[1],
     loading: _loading[0],
     refreshing: _refreshing[0],
-    mounted: _mounted[0],
+    mounted: () => mountedRef.current,
     params: _params[0],
     updateParams: _params[1],
     refresh,

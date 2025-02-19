@@ -1,4 +1,4 @@
-import i18n, { LanguageDetectorAsyncModule } from "i18next";
+import i18n, { LanguageDetectorAsyncModule, TFunction } from "i18next";
 import { initReactI18next, useTranslation } from "react-i18next";
 import { storage, StorageKeys } from "utils";
 import { en } from "./EN";
@@ -46,9 +46,10 @@ if (!i18n.isInitialized) {
 }
 
 export type TxKeyPath = RecursiveKeyOf<typeof en>;
+export type TxFn = TFunction<TxKeyPath, undefined>;
 
 export const useTx = (): Omit<ReturnType<typeof useTranslation>, "t"> & {
-  t: <TKey extends TxKeyPath>(key: TKey) => string;
+  t: TxFn;
 } => useTranslation();
 
 export default i18n;

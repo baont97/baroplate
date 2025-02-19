@@ -1,41 +1,32 @@
-import React from "react";
-import { Pressable, StyleProp, Text, ViewStyle } from "react-native";
+import React, { useLayoutEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SupportedLngs } from "i18n/i18n.types";
-import { Layout } from "components";
+import { AppButton, Layout } from "components";
+import { palette, style } from "theme";
+import { useTx } from "i18n";
+import { useAppNavigation } from "navigators";
 
 export const LanguageScreen = () => {
+  const navigation = useAppNavigation<"Language">();
   const { i18n } = useTranslation();
+  const { t } = useTx();
 
-  const changeLanguage = (supportedLngs: SupportedLngs) => {
-    i18n.changeLanguage(supportedLngs);
-  };
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: t("language.title"),
+    });
+  });
 
   return (
-    <Layout>
-      <Text>Current: {i18n.language}</Text>
-
-      <Pressable
-        style={$press}
-        onPress={() => changeLanguage(SupportedLngs.vi)}
-      >
-        <Text>{SupportedLngs.vi}</Text>
-      </Pressable>
-
-      <Pressable
-        style={$press}
-        onPress={() => changeLanguage(SupportedLngs.en)}
-      >
-        <Text>{SupportedLngs.en}</Text>
-      </Pressable>
+    <Layout padding="md" style={style.gap_sm}>
+      {[SupportedLngs.vi, SupportedLngs.en].map((lng) => (
+        <AppButton
+          key={lng}
+          title={lng.toUpperCase()}
+          style={i18n.language !== lng && { backgroundColor: palette.gray300 }}
+          onPress={() => i18n.changeLanguage(lng)}
+        />
+      ))}
     </Layout>
   );
-};
-
-const $press: StyleProp<ViewStyle> = {
-  height: 36,
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: "white",
-  marginTop: 12,
 };

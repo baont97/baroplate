@@ -10,7 +10,7 @@ import { AppText } from "components/AppText";
 
 export const Modert: React.FC = () => {
   const { modert, hide } = useModert();
-  const { colorSchemeName } = useAppTheme();
+  const appTheme = useAppTheme();
 
   return (
     <Modal
@@ -27,7 +27,10 @@ export const Modert: React.FC = () => {
         <View
           style={[
             $content,
-            { backgroundColor: colorSchemeName === "dark" ? "black" : "white" },
+            {
+              backgroundColor:
+                appTheme.colorSchemeName === "dark" ? "black" : "white",
+            },
           ]}
         >
           {Boolean(modert.title) && (

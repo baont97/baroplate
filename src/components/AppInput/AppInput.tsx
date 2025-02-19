@@ -28,7 +28,7 @@ export type AppTextInputProps = {
   placeholderTx?: TxKeyPath;
   placeholderTxOptions?: TOptions;
 
-  errorMessage?: string;
+  errorMessage?: string | false | undefined;
 
   Left?: (props: AppTextInputIconProps) => React.ReactNode;
   Right?: (props: AppTextInputIconProps) => React.ReactNode;

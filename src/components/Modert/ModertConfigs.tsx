@@ -5,8 +5,8 @@ import React, {
   useState,
 } from "react";
 import { Modert } from "./Modert";
-import { useTranslation } from "react-i18next";
 import { AppButtonProps } from "components/AppButton";
+import { useTx } from "i18n";
 
 type ModertProps = {
   title?: string;
@@ -41,7 +41,7 @@ const context = React.createContext<ModertProviderProps>(
 const Provider = context.Provider;
 
 const ModertProvider: React.FC<PropsWithChildren> = (props) => {
-  const modalTx = useTranslation("common");
+  const { t } = useTx();
   const [modertProps, setModertProps] = useState<ModertProps>(dfModertProps);
 
   const show: ModertProviderProps["show"] = (props) =>
@@ -56,7 +56,7 @@ const ModertProvider: React.FC<PropsWithChildren> = (props) => {
               item.onPress?.(undefined as any);
             },
           }))
-        : [{ title: modalTx.t("ok"), onPress: hide }],
+        : [{ title: t("common.ok"), onPress: hide }],
     });
 
   const hide = () => setModertProps((prev) => ({ ...prev, visible: false }));

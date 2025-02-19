@@ -1,4 +1,5 @@
 export const images = {
+  blank: require("./blank.png"),
   bootsplash_logo: require("./bootsplash_logo.png"),
   calendar: require("./calendar.png"),
   check: require("./check.png"),
