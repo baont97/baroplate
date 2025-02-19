@@ -5,6 +5,12 @@ import { en } from "./EN";
 import { vi } from "./VI";
 import { SupportedLngs } from "./i18n.types";
 
+export type RecursiveKeyOf<TObj extends Record<string, any>> = {
+  [TKey in keyof TObj & string]: TObj[TKey] extends Record<string, any>
+    ? `${TKey}` | `${TKey}.${RecursiveKeyOf<TObj[TKey]>}`
+    : `${TKey}`;
+}[keyof TObj & string];
+
 const languageDetector: LanguageDetectorAsyncModule = {
   type: "languageDetector",
   async: true,
@@ -37,5 +43,7 @@ if (!i18n.isInitialized) {
       cache: { enabled: true },
     });
 }
+
+export type TxKeyPath = RecursiveKeyOf<typeof en>;
 
 export default i18n;

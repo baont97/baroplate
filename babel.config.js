@@ -18,6 +18,7 @@ module.exports = {
           "@i18n": "./src/i18n",
           "@assets": "./assets",
           "@theme": "./src/theme",
+          "@provider": "./src/provider",
         },
       },
     ],

@@ -7,16 +7,14 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { AppStackParamList } from "navigators";
 import { signIn } from "store";
 import { useAppDispatch } from "hooks";
 import { useLoader } from "@baont97/rn-loader";
+import { AppStackNavigationProps } from "navigators";
+import { useNavigation } from "@react-navigation/native";
 
-export const SignInScreen: React.FC<
-  NativeStackScreenProps<AppStackParamList, "SignIn">
-> = (props) => {
-  const { navigation } = props;
+export const SignInScreen = () => {
+  const navigation = useNavigation<AppStackNavigationProps<"SignIn">>();
   const loader = useLoader();
 
   /// redux

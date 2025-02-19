@@ -3,6 +3,8 @@ import { TTranslations } from "./EN";
 export const vi: TTranslations = {
   common: {
     hi: "Xin chào",
+    save: "Lưu",
+    continue: "Tiếp tục",
   },
   biometric: {
     FaceID: {

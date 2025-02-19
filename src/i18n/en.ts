@@ -1,6 +1,8 @@
 export const en = {
   common: {
     hi: "Hi",
+    save: "Save",
+    continue: "Continue",
   },
   biometric: {
     FaceID: {

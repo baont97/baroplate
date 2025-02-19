@@ -4,18 +4,16 @@ import React, {
   useLayoutEffect,
   useState,
 } from "react";
-import { Button, Image, StyleProp, Text, View, ViewStyle } from "react-native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { AppStackParamList } from "navigators";
+import { Button, Image, Text, View } from "react-native";
 import { signOut } from "store";
 import { useAppDispatch } from "hooks";
 import { Pokemon } from "models";
 import { pokemonApi } from "services";
+import { useAppNavigation } from "navigators";
+import { Layout } from "components/Layout";
 
-export const DemoScreen: React.FC<
-  NativeStackScreenProps<AppStackParamList, "Demo">
-> = (props) => {
-  const { navigation } = props;
+export const DemoScreen = () => {
+  const navigation = useAppNavigation<"Demo">();
 
   /// redux
   const dispatch = useAppDispatch();
@@ -48,18 +46,13 @@ export const DemoScreen: React.FC<
   };
 
   return (
-    <View style={$root}>
+    <Layout>
       {pokemonList.map((x, i) => (
         <View key={i}>
           <Image source={{ uri: x.url }} style={{ width: 20, height: 20 }} />
           <Text>{x.name}</Text>
         </View>
       ))}
-    </View>
+    </Layout>
   );
-};
-
-const $root: StyleProp<ViewStyle> = {
-  flex: 1,
-  padding: 12,
 };

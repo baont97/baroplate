@@ -1,11 +1,13 @@
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from "react-native";
-import { KSpacing, scaleFontSize, spacing } from "./Spacing";
+import { KSpacing, scale, scaleFontSize, spacing } from "./Spacing";
 import { KPalette, palette } from "./Palette";
 import { KTypography, typography } from "./Typography";
 
+type Vimage = ImageStyle & ViewStyle;
+
 const mapStyleWithSpacing = (
   prefix: string,
-  styleName: keyof ViewStyle | keyof TextStyle | keyof ImageStyle
+  styleName: keyof Vimage | keyof TextStyle | keyof ImageStyle
 ): unknown =>
   Object.fromEntries(
     Object.entries(spacing).map((key) => [
@@ -16,7 +18,7 @@ const mapStyleWithSpacing = (
 
 const mapStyleWithColor = (
   prefix: string,
-  styleName: keyof ViewStyle | keyof TextStyle | keyof ImageStyle
+  styleName: keyof Vimage | keyof TextStyle | keyof ImageStyle
 ): unknown =>
   Object.fromEntries(
     Object.entries(palette).map((key) => [
@@ -34,6 +36,21 @@ const mapStyleWithTypo = (): unknown =>
   );
 
 export const style = StyleSheet.create({
+  // Custom
+  inbut: {
+    height: scale.y(58, 58 * 1.5),
+    borderRadius: spacing.md,
+  },
+  headerImage: {
+    height: scale.x(18, 18 * 1.5),
+    width: scale.x(18, 18 * 1.5),
+  },
+  headerButton: {
+    height: scale.x(32, 32 * 1.5),
+    backgroundColor: palette.white,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   // View styles
   shadow: {
     shadowColor: "#000",
@@ -56,6 +73,8 @@ export const style = StyleSheet.create({
   row_wrap: { flexDirection: "row", flexWrap: "wrap" },
   rounded: { borderRadius: 9999 },
   abs: { position: "absolute" },
+  zIndex1: { zIndex: 1 },
+  zIndexM1: { zIndex: -1 },
   abs_fo: StyleSheet.absoluteFillObject,
   overflow_hidden: { overflow: "hidden" },
   center: {
@@ -115,18 +134,19 @@ export const style = StyleSheet.create({
   bg_transparent: { backgroundColor: palette.transparent },
   ...(mapStyleWithColor("bg_color", "backgroundColor") as Record<
     `bg_color_${KPalette}`,
-    ViewStyle
+    Vimage
   >),
   ...(mapStyleWithSpacing("round", "borderRadius") as Record<
     `round_${KSpacing}`,
-    ViewStyle
+    Vimage
   >),
-  ...(mapStyleWithSpacing("w", "width") as Record<`w_${KSpacing}`, ViewStyle>),
-  ...(mapStyleWithSpacing("h", "height") as Record<`h_${KSpacing}`, ViewStyle>),
+  ...(mapStyleWithSpacing("w", "width") as Record<`w_${KSpacing}`, Vimage>),
+  ...(mapStyleWithSpacing("h", "height") as Record<`h_${KSpacing}`, Vimage>),
   ...(mapStyleWithColor("tint", "tintColor") as Record<
     `tint_${KPalette}`,
     ImageStyle
   >),
+  ...(mapStyleWithSpacing("gap", "gap") as Record<`gap_${KSpacing}`, Vimage>),
   // Text styles
   tx_shadow: {
     textShadowColor: "black",
@@ -153,6 +173,10 @@ export const style = StyleSheet.create({
   },
   tx_underline: { textDecorationLine: "underline" },
   tx_uppercase: { textTransform: "uppercase" },
+  tx_nav_title: {
+    fontFamily: typography.medium,
+    fontSize: spacing.txBaseSize,
+  },
   ...(mapStyleWithColor("tx_color", "color") as Record<
     `tx_color_${KPalette}`,
     TextStyle
@@ -163,64 +187,61 @@ export const style = StyleSheet.create({
   >),
   ...(mapStyleWithTypo() as Record<`tx_font_${KTypography}`, TextStyle>),
   // Margin styles
-  ...(mapStyleWithSpacing("m", "margin") as Record<`m_${KSpacing}`, ViewStyle>),
+  ...(mapStyleWithSpacing("m", "margin") as Record<`m_${KSpacing}`, Vimage>),
   ...(mapStyleWithSpacing("ml", "marginLeft") as Record<
     `ml_${KSpacing}`,
-    ViewStyle
+    Vimage
   >),
   ...(mapStyleWithSpacing("mr", "marginRight") as Record<
     `mr_${KSpacing}`,
-    ViewStyle
+    Vimage
   >),
   ...(mapStyleWithSpacing("mb", "marginBottom") as Record<
     `mb_${KSpacing}`,
-    ViewStyle
+    Vimage
   >),
   ...(mapStyleWithSpacing("mt", "marginTop") as Record<
     `mt_${KSpacing}`,
-    ViewStyle
+    Vimage
   >),
   ...(mapStyleWithSpacing("mx", "marginHorizontal") as Record<
     `mx_${KSpacing}`,
-    ViewStyle
+    Vimage
   >),
   ...(mapStyleWithSpacing("my", "marginVertical") as Record<
     `my_${KSpacing}`,
-    ViewStyle
+    Vimage
   >),
   // Padding styles
-  ...(mapStyleWithSpacing("p", "padding") as Record<
-    `p_${KSpacing}`,
-    ViewStyle
-  >),
+  ...(mapStyleWithSpacing("p", "padding") as Record<`p_${KSpacing}`, Vimage>),
   ...(mapStyleWithSpacing("pl", "paddingLeft") as Record<
     `pl_${KSpacing}`,
-    ViewStyle
+    Vimage
   >),
   ...(mapStyleWithSpacing("pr", "paddingRight") as Record<
     `pr_${KSpacing}`,
-    ViewStyle
+    Vimage
   >),
   ...(mapStyleWithSpacing("pb", "paddingBottom") as Record<
     `pb_${KSpacing}`,
-    ViewStyle
+    Vimage
   >),
   ...(mapStyleWithSpacing("pt", "paddingTop") as Record<
     `pt_${KSpacing}`,
-    ViewStyle
+    Vimage
   >),
   ...(mapStyleWithSpacing("px", "paddingHorizontal") as Record<
     `px_${KSpacing}`,
-    ViewStyle
+    Vimage
   >),
   ...(mapStyleWithSpacing("py", "paddingVertical") as Record<
     `py_${KSpacing}`,
-    ViewStyle
+    Vimage
   >),
   // Border styles
   ...(mapStyleWithColor("border_color", "borderColor") as Record<
     `border_color_${KPalette}`,
-    ViewStyle
+    Vimage
   >),
   // Theme
 });

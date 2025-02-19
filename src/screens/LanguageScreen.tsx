@@ -1,13 +1,10 @@
 import React from "react";
-import { Pressable, StyleProp, Text, View, ViewStyle } from "react-native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { AppStackParamList } from "navigators";
+import { Pressable, StyleProp, Text, ViewStyle } from "react-native";
 import { useTranslation } from "react-i18next";
 import { SupportedLngs } from "i18n/i18n.types";
+import { Layout } from "components";
 
-export const LanguageScreen: React.FC<
-  NativeStackScreenProps<AppStackParamList, "Language">
-> = () => {
+export const LanguageScreen = () => {
   const { i18n } = useTranslation();
 
   const changeLanguage = (supportedLngs: SupportedLngs) => {
@@ -15,7 +12,7 @@ export const LanguageScreen: React.FC<
   };
 
   return (
-    <View style={$root}>
+    <Layout>
       <Text>Current: {i18n.language}</Text>
 
       <Pressable
@@ -31,13 +28,8 @@ export const LanguageScreen: React.FC<
       >
         <Text>{SupportedLngs.en}</Text>
       </Pressable>
-    </View>
+    </Layout>
   );
-};
-
-const $root: StyleProp<ViewStyle> = {
-  flex: 1,
-  padding: 12,
 };
 
 const $press: StyleProp<ViewStyle> = {
