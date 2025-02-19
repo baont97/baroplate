@@ -31,7 +31,11 @@ export const useAppInputStyle = ({
   };
 };
 
-const $root: SViewStyle = [{ borderWidth: 1 }, style.inbut, style.row];
+const $root: SViewStyle = [
+  style.inbut,
+  style.row,
+  style.border_width_hairlineWidth,
+];
 const $input: STextStyle = [
   style.tx_font_regular,
   { fontSize: spacing.txBaseSize, paddingHorizontal: scale.x(20, 20), flex: 1 },

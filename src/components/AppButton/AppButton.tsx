@@ -1,6 +1,6 @@
 import React from "react";
 import { AppText, AppTextProps } from "components/AppText";
-import { Pressable, PressableProps } from "react-native";
+import { PressableProps } from "react-native";
 import {
   defaultButtonPressedScale,
   EAppButtonStatus,
@@ -12,6 +12,7 @@ import { STextStyle, SViewStyle } from "models";
 import { Loader } from "../Loader";
 
 import * as styles from "./AppButton.styles";
+import { PlatformPressable } from "@react-navigation/elements";
 
 export type AppButtonProps = {
   title?: AppTextProps["children"];
@@ -49,14 +50,7 @@ export const AppButton: React.FC<AppButtonProps> = ({
   const $title = [presetStyle.title[styleKey], titleStyle];
 
   return (
-    <Pressable
-      {...rest}
-      disabled={_disabled || loading}
-      style={({ pressed }) => [
-        $root,
-        { transform: [{ scale: pressed ? pressedScale : 1 }] },
-      ]}
-    >
+    <PlatformPressable {...rest} disabled={_disabled || loading} style={$root}>
       {loading ? (
         <Loader style={styles.$loader} />
       ) : (
@@ -64,6 +58,6 @@ export const AppButton: React.FC<AppButtonProps> = ({
           {title}
         </AppText>
       )}
-    </Pressable>
+    </PlatformPressable>
   );
 };

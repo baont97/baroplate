@@ -1,7 +1,7 @@
-import { DemoScreen, LanguageScreen, SignInScreen } from "screens";
+import { HomeScreen, LanguageScreen, SignInScreen } from "screens";
 import { useAppSelector } from "hooks";
 import { selectIsSignedIn } from "store";
-import { palette, style } from "theme";
+import { palette } from "theme";
 import { isAndroid } from "utils";
 import { images } from "@assets/index";
 import { StaticParamList, useNavigation } from "@react-navigation/native";
@@ -18,14 +18,13 @@ export const AppStack = createNativeStackNavigator({
     headerBackImageSource: isAndroid ? images.chevron_left : undefined,
     headerShadowVisible: false,
     headerBackButtonDisplayMode: "minimal",
-    headerTitleStyle: style.tx_nav_title,
     headerTintColor: isAndroid ? palette.primary500 : undefined,
   },
   groups: {
     SignedIn: {
       if: useIsSignedIn,
       screens: {
-        Demo: DemoScreen,
+        Home: HomeScreen,
       },
     },
     SignedOut: {

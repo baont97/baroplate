@@ -147,6 +147,10 @@ export const style = StyleSheet.create({
     ImageStyle
   >),
   ...(mapStyleWithSpacing("gap", "gap") as Record<`gap_${KSpacing}`, Vimage>),
+  ...(mapStyleWithSpacing("border_width", "borderWidth") as Record<
+    `border_width_${KSpacing}`,
+    Vimage
+  >),
   // Text styles
   tx_shadow: {
     textShadowColor: "black",
@@ -173,10 +177,6 @@ export const style = StyleSheet.create({
   },
   tx_underline: { textDecorationLine: "underline" },
   tx_uppercase: { textTransform: "uppercase" },
-  tx_nav_title: {
-    fontFamily: typography.medium,
-    fontSize: spacing.txBaseSize,
-  },
   ...(mapStyleWithColor("tx_color", "color") as Record<
     `tx_color_${KPalette}`,
     TextStyle

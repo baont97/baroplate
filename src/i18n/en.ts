@@ -3,6 +3,7 @@ export const en = {
     hi: "Hi",
     save: "Save",
     continue: "Continue",
+    signOut: "Sign Out",
   },
   biometric: {
     FaceID: {
@@ -25,6 +26,26 @@ export const en = {
     },
     promtMessage: "Confirm your fingerprint",
     cancelButtonText: "Cancel",
+  },
+  form: {
+    username: {
+      label: "Username",
+      placeholder: "Enter your username",
+    },
+    password: {
+      label: "Password",
+      placeholder: "Enter your password",
+    },
+  },
+  language: {
+    title: "Language",
+  },
+  signIn: {
+    title: "Sign In",
+    submitButton: "Sign In",
+  },
+  home: {
+    title: "Home",
   },
 };
 

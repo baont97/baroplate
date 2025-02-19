@@ -1,21 +1,18 @@
 import React, { useCallback, useLayoutEffect } from "react";
-import {
-  Button,
-  StyleProp,
-  TextInput,
-  TextStyle,
-  View,
-  ViewStyle,
-} from "react-native";
 import { signIn } from "store";
 import { useAppDispatch } from "hooks";
 import { useLoader } from "@baont97/rn-loader";
 import { AppStackNavigationProps } from "navigators";
 import { useNavigation } from "@react-navigation/native";
+import { AppButton, AppText, AppTextInput, Layout } from "components";
+import { style } from "theme";
+import { useTx } from "i18n";
+import { PlatformPressable } from "@react-navigation/elements";
 
 export const SignInScreen = () => {
   const navigation = useNavigation<AppStackNavigationProps<"SignIn">>();
   const loader = useLoader();
+  const { t } = useTx();
 
   /// redux
   const dispatch = useAppDispatch();
@@ -29,37 +26,31 @@ export const SignInScreen = () => {
     }, 1000);
   };
 
-  const changeLng = () => {
-    navigation.navigate("Language");
-  };
-
   /// navigations
   useLayoutEffect(
     useCallback(() => {
       navigation.setOptions({
-        headerRight: () => <Button title="Language" onPress={changeLng} />,
+        title: t("signIn.title"),
+        headerRight: ({ tintColor }) => (
+          <PlatformPressable onPress={() => navigation.navigate("Language")}>
+            <AppText tx="language.title" style={{ color: tintColor }} />
+          </PlatformPressable>
+        ),
       });
     }, [])
   );
 
   return (
-    <View style={$root}>
-      <TextInput placeholder="user name" style={$input} />
-      <TextInput placeholder="password" style={$input} />
-      <Button title="sign in" onPress={submit} />
-    </View>
+    <Layout padding="md" style={style.gap_sm}>
+      <AppTextInput
+        labelTx="form.username.label"
+        placeholderTx="form.username.placeholder"
+      />
+      <AppTextInput
+        labelTx="form.password.label"
+        placeholderTx="form.password.placeholder"
+      />
+      <AppButton titleTx="signIn.submitButton" onPress={submit} />
+    </Layout>
   );
-};
-
-const $root: StyleProp<ViewStyle> = {
-  flex: 1,
-  padding: 12,
-};
-
-const $input: StyleProp<TextStyle> = {
-  height: 36,
-  backgroundColor: "white",
-  marginBottom: 12,
-  paddingHorizontal: 12,
-  borderRadius: 2,
 };

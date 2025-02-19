@@ -21,15 +21,15 @@ export const getReactNavigationTheme = ({
       fontWeight: "normal",
     },
     medium: {
-      fontFamily: typography.regular,
+      fontFamily: typography.medium,
       fontWeight: "normal",
     },
     bold: {
-      fontFamily: typography.regular,
+      fontFamily: typography.semiBold,
       fontWeight: "normal",
     },
     heavy: {
-      fontFamily: typography.regular,
+      fontFamily: typography.bold,
       fontWeight: "normal",
     },
   },

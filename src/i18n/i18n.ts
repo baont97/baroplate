@@ -1,5 +1,5 @@
 import i18n, { LanguageDetectorAsyncModule } from "i18next";
-import { initReactI18next } from "react-i18next";
+import { initReactI18next, useTranslation } from "react-i18next";
 import { storage, StorageKeys } from "utils";
 import { en } from "./EN";
 import { vi } from "./VI";
@@ -37,13 +37,18 @@ if (!i18n.isInitialized) {
       },
 
       // have a common namespace used around the full app
-      ns: ["common"],
-      defaultNS: "common",
+      ns: Object.keys(en),
+      nsSeparator: ".",
+      keySeparator: false,
       debug: true,
       cache: { enabled: true },
     });
 }
 
 export type TxKeyPath = RecursiveKeyOf<typeof en>;
+
+export const useTx = (): Omit<ReturnType<typeof useTranslation>, "t"> & {
+  t: <TKey extends TxKeyPath>(key: TKey) => string;
+} => useTranslation();
 
 export default i18n;

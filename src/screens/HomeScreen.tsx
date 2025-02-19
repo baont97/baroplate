@@ -4,22 +4,26 @@ import React, {
   useLayoutEffect,
   useState,
 } from "react";
-import { Button, Image, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { signOut } from "store";
 import { useAppDispatch } from "hooks";
-import { Pokemon } from "models";
+import { TPokemon } from "models";
 import { pokemonApi } from "services";
 import { useAppNavigation } from "navigators";
 import { Layout } from "components/Layout";
+import { useTx } from "i18n";
+import { PlatformPressable } from "@react-navigation/elements";
+import { AppText } from "components";
 
-export const DemoScreen = () => {
-  const navigation = useAppNavigation<"Demo">();
+export const HomeScreen = () => {
+  const navigation = useAppNavigation<"Home">();
+  const { t } = useTx();
 
   /// redux
   const dispatch = useAppDispatch();
 
   /// state
-  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+  const [pokemonList, setPokemonList] = useState<TPokemon[]>([]);
 
   /// effect
   useEffect(() => {
@@ -27,15 +31,17 @@ export const DemoScreen = () => {
   }, []);
 
   /// functions
-  const _signOut = () => {
-    dispatch(signOut());
-  };
 
   /// navigations
   useLayoutEffect(
     useCallback(() => {
       navigation.setOptions({
-        headerRight: () => <Button title="sign out" onPress={_signOut} />,
+        title: t("home.title"),
+        headerRight: ({ tintColor }) => (
+          <PlatformPressable onPress={() => dispatch(signOut())}>
+            <AppText tx="common.signOut" style={{ color: tintColor }} />
+          </PlatformPressable>
+        ),
       });
     }, [])
   );

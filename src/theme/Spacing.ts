@@ -1,4 +1,4 @@
-import { Dimensions } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import DeviceInfo from "react-native-device-info";
 
 const { width, height } = Dimensions.get("screen");
@@ -32,11 +32,12 @@ export const scaleFontSize = (mobile: number, tablet?: number) =>
   Use these spacings for margins/paddings and other whitespace throughout your app.
  */
 export const spacing = {
+  zero: 0,
   screenWidth: width,
   screenHeight: height,
-  windowHeight: Dimensions.get("window").height,
   txBaseSize: scaleFontSize(14),
-  zero: 0,
+  hairlineWidth: StyleSheet.hairlineWidth,
+  windowHeight: Dimensions.get("window").height,
   /** 2, 2 * 1.5 */
   xxxs: scale.x(2, 2 * 1.5),
   /** 4, 4 * 1.5 */
